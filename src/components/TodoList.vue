@@ -3,7 +3,7 @@
   <Checkbox />
   <label printname></label>
     <input type="checkbox" v-model:> 
-    <span>{{printName}}</span>
+    <span >{{printedName}}</span>
   
   </div>
 </template>
@@ -14,13 +14,14 @@ export default {
   printName: ''
   }},
   props:[
-    'listName',
+    'inputName',
+    'printedName',
     
   ],
 
   methods:{
     // printNames(){
-    //   this.printName = this.listName
+    //   // this.$emit(this.printName = this.inputName)
     // }
   }
 }

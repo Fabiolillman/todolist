@@ -10,10 +10,10 @@
    <p class="top-p-row">Du har {{numberLeft}} todos kvar att göra</p>
    </div>
    <ul class="list-container">
-   <TodoList :listName="listName"/>
+   <TodoList :inputName="inputName" :printedName="printName"/>
    </ul>
    <div class="btn-container">
-   <input type="text" v-model="listName">
+   <input type="text" v-model="inputName" placeholder="type stuff here">
    <button @click='printNames'>Lägg till todo</button>
    </div>
   </div>
@@ -25,22 +25,42 @@
 import TodoList from './components/TodoList.vue'
 import Menu from './components/Menu.vue'
 export default {
+ 
+ mounted: function(){
+  this.printNames();
+ },
 
-   methods:{
-    printNames(){
-      this.printName = this.listName
-    }
-  },
-
-  name: 'App',
   components: {
     TodoList,
     Menu
   },
 
   data(){return{
-    listName:''
-  }}
+    inputName:'',
+    numberLeft:'',
+    printName:"",
+    hideCompletedTodos: false,
+    todos: [],
+  }},
+  
+     methods:{
+    printNames(){
+      this.printName = this.inputName
+    },
+
+    testing(){
+      
+    },
+
+    dataStorage(){
+      Idcounter=0
+      id+=Idcounter
+      taskName = this.Inputname
+
+    }
+
+  
+  },
 }
 </script>
 
