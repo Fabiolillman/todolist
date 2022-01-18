@@ -1,65 +1,65 @@
 <template>
   <div id="app">
     <div class="menu-container">
-    <Menu />
+      <Menu />
     </div>
     <div class="top-container">
-   <img src="./assets/teflon-panna.svg">
-   <h1>TEFLON</h1>
-   <p>När det inte fastnar</p>
-   <p class="top-p-row">Du har {{numberLeft}} todos kvar att göra</p>
-   </div>
-   <ul class="list-container">
-   <TodoList :inputName="inputName" :printedName="printName"/>
-   </ul>
-   <div class="btn-container">
-   <input type="text" v-model="inputName" placeholder="type stuff here">
-   <button @click='printNames'>Lägg till todo</button>
-   </div>
+      <img src="./assets/teflon-panna.svg">
+      <h1>TEFLON</h1>
+      <p>När det inte fastnar</p>
+      <p class="top-p-row">Du har <!--{{numberLeft}} --> todos kvar att göra</p>
+    </div>
+    <ul class="list-container" id="listContainer">
+      <TodoItem 
+      :todo="item"
+      v-for="item in todos" 
+      v-bind:key="item.id" />
+    </ul>
+    <div class="btn-container">
+      <input type="text" v-model="content" placeholder="type stuff here">
+      <button @click='printList'>Lägg till todo</button>
+      <span>{{console()}}</span>
+    </div>
   </div>
 </template>
 
-
-
 <script>
-import TodoList from './components/TodoList.vue'
+import TodoItem from './components/TodoItem.vue'
 import Menu from './components/Menu.vue'
 export default {
- 
- mounted: function(){
-  this.printNames();
- },
-
+  name:'app',
+  
   components: {
-    TodoList,
+    TodoItem,
     Menu
   },
 
   data(){return{
-    inputName:'',
-    numberLeft:'',
-    printName:"",
-    hideCompletedTodos: false,
+
+    id: '',
+    content: '',
+    // hideCompletedTodos: false,
     todos: [],
+    
   }},
   
-     methods:{
-    printNames(){
-      this.printName = this.inputName
-    },
-
-    testing(){
+  methods:{
+    printList(){
+       this.todos.push({
+         id: this.generateID(),
+         content: this.content,
+         done: true,
+      });
       
     },
-
-    dataStorage(){
-      Idcounter=0
-      id+=Idcounter
-      taskName = this.Inputname
-
-    }
-
-  
+    console(){
+     console.log(this.todos)
+     },
+    
+    generateID(){
+    return Math.floor(Math.random()*Math.pow(10,25))  
+    },
+     
   },
 }
 </script>
