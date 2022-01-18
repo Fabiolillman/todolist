@@ -5,7 +5,7 @@
     <input type="checkbox" > 
     <span>{{todo.content}}</span>
     <img class="trash" src="../assets/delete.svg">
-    <button v-on:click='onDestroyClick'>Test Delete</button>
+    <button @click="yell)">Test Delete</button>
     
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
   export default {
   data(){return{
-  // printName: ''
+ 
   }},
   props:[
     'todo',
@@ -24,18 +24,21 @@
   yell(){
     console.log(this.item)
   },
-
   
-  onDestroyClick: function(){
-    // this.$destroy();
-    // this.$delete(this.todo.content);
-    this.todoItem=!this.todoItem
-  }
-   
+  //  deleteTodo(){      
+      // this.todos = !this.todos
+      // persist(this.todos)
+    // },
+    
+ 
+    // checkTodo(){
+    //   // this.item.done = !this.item.done
 
-
+    //   this.item = this.item.filter(t => !t.done)
+      // persist(this.todos)
+    },
   }
-}
+
 </script>
 
 <style scoped>
