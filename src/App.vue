@@ -1,53 +1,75 @@
 <template>
   <div id="app">
+  
     <div class="menu-container">
-      <Menu />
+      <!-- <Menu /> -->
     </div>
+
     <div class="top-container">
       <img src="./assets/teflon-panna.svg">
       <h1>TEFLON</h1>
       <p>När det inte fastnar</p>
-      <p class="top-p-row">Du har {{todos.length}}  todos kvar att göra</p>
+      <p class="top-p-row">Du har {{todos.length}} todos kvar att göra</p>
     </div>
-    <ul class="list-container" id="listContainer">
-      <TodoItem 
-      :todo="item"
-      v-for="item in todos" 
-      v-bind:key="item.id" 
-      @removeTodo="removeItem"
+    
+    <div class="list-container" id="listContainer">
+     <TodoList 
+     :todos="todos"
+      @removeItem="removeItem"
+      @completeCheck="doneChecker"
       />
-    </ul>
+    </div>
+
     <div class="btn-container">
       <input type="text" v-model="content" placeholder="type stuff here">
       <button @click='printList'>Lägg till todo</button>
       <span>{{console()}}</span>
-      <!-- <button @click='testing'>Lägg till todo</button> -->
+      
     </div>
   </div>
 </template>
 
 <script>
-import TodoItem from './components/TodoItem.vue'
-import Menu from './components/Menu.vue'
+// import TodoItem from './components/TodoItem.vue'
+// import Menu from './components/Menu.vue'
+import TodoList from './components/TodoList.vue'
 export default {
   name:'app',
   
   components: {
-    TodoItem,
-    Menu
+    // TodoItem,
+    // Menu,
+    TodoList
   },
 
   data(){return{
 
-    id: '',
+    // id: '',
     content: '',
     // hideCompletedTodos: false,
     todos: [],
+    temp:[],
     
   }},
-  
+  computed:{
+
+  doneCheck(){
+    let notDone = []
+    for(let todo of this.todos){
+    if(!todo.done){
+      notDone.push(todo)
+    } 
+    }
+    return notDone
+  }
+
+  },
+
   methods:{
     printList(){
+      if(this.content===""){
+        return
+      }
        this.todos.push({
          id: this.generateID(),
          content: this.content,
@@ -58,6 +80,11 @@ export default {
     },
     // this.content=!this.content
 
+     doneChecker(){
+    this.done=!this.done
+     },
+
+
     console(){
      console.log(this.todos)
     //  console.log(index)
@@ -67,31 +94,20 @@ export default {
     return Math.floor(Math.random()*Math.pow(10,25))  
     },
     
-    // removeTodo(index){      
-    // this.item
-    // v-on:removeIndex=""
-    // @removeTodo="removeTodo(index)"
-    // this.$emit('removeIndex', index)
-    // this.$emit('removeTodo)
-
-    // },
-    
-    
-    removeItem(index){
+    removeItem(index){      
+ 
     this.todos.splice(index,1)
+
     },
+    
+
 
      testing(){
 console.log(this.done)
      },
 
-    //  checkTodo(){
-    //   this.todo.done = !this.todo.done
-    //   // persist(this.todos)
-    // },
-// removeTask: function(index) {
-//     this.content.splice(index, 1);
-// }
+
+
      
   },
 }

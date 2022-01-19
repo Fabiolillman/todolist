@@ -2,10 +2,10 @@
   <div class="check-box" >
   <!-- <Checkbox /> -->
     <label></label>
-    <input type="checkbox" > 
+    <input type="checkbox" @click="checkComplete"> 
     <span>{{todo.content}}</span>
-    <img class="trash" src="../assets/delete.svg">
-    <button @click="removeTodo">Test Delete</button>
+    <img @click="removeTodo" class="trash" src="../assets/delete.svg">
+  
     
   </div>
 </template>
@@ -17,25 +17,22 @@
   }},
   props:[
     'todo',
+    'index',
   ],
 
   methods:{
- 
-  // yell(){
-  //   console.log(this.item)
-  // },
-  
-   deleteTodo(){      
+
+   removeTodo(){      
      this.$emit('removeTodo')
     },
-    
- 
-    // checkTodo(){
-    //   // this.item.done = !this.item.done
 
-    //   this.item = this.item.filter(t => !t.done)
-      // persist(this.todos)
+     checkComplete(){      
+     this.$emit('checkComplete')
     },
+    },
+
+  
+
   }
 
 </script>
@@ -46,11 +43,25 @@
   border: 2px solid black;
   margin: 1px;
   background-color: whitesmoke;
+  
 
 }
 .trash{
-width: 30px;
-height: 60px;
+  width: 30px;
+  height: 60px;
+  
+}
+span{
+  font-size: 30px;
+
+}
+ul{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.checkbox{
+  margin-top: 20px;
 }
 
 </style>
