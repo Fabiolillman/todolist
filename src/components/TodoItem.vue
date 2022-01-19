@@ -5,7 +5,7 @@
     <input type="checkbox" > 
     <span>{{todo.content}}</span>
     <img class="trash" src="../assets/delete.svg">
-    <button @click="yell)">Test Delete</button>
+    <button @click="removeTodo">Test Delete</button>
     
   </div>
 </template>
@@ -21,14 +21,13 @@
 
   methods:{
  
-  yell(){
-    console.log(this.item)
-  },
+  // yell(){
+  //   console.log(this.item)
+  // },
   
-  //  deleteTodo(){      
-      // this.todos = !this.todos
-      // persist(this.todos)
-    // },
+   deleteTodo(){      
+     this.$emit('removeTodo')
+    },
     
  
     // checkTodo(){

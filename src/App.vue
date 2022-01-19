@@ -7,18 +7,21 @@
       <img src="./assets/teflon-panna.svg">
       <h1>TEFLON</h1>
       <p>När det inte fastnar</p>
-      <p class="top-p-row">Du har <!--{{numberLeft}} --> todos kvar att göra</p>
+      <p class="top-p-row">Du har {{todos.length}}  todos kvar att göra</p>
     </div>
     <ul class="list-container" id="listContainer">
       <TodoItem 
       :todo="item"
       v-for="item in todos" 
-      v-bind:key="item.id" />
+      v-bind:key="item.id" 
+      @removeTodo="removeItem"
+      />
     </ul>
     <div class="btn-container">
       <input type="text" v-model="content" placeholder="type stuff here">
       <button @click='printList'>Lägg till todo</button>
       <span>{{console()}}</span>
+      <!-- <button @click='testing'>Lägg till todo</button> -->
     </div>
   </div>
 </template>
@@ -49,16 +52,46 @@ export default {
          id: this.generateID(),
          content: this.content,
          done: true,
+        
       });
-      
+       this.content=""
     },
+    // this.content=!this.content
+
     console(){
      console.log(this.todos)
+    //  console.log(index)
      },
     
     generateID(){
     return Math.floor(Math.random()*Math.pow(10,25))  
     },
+    
+    // removeTodo(index){      
+    // this.item
+    // v-on:removeIndex=""
+    // @removeTodo="removeTodo(index)"
+    // this.$emit('removeIndex', index)
+    // this.$emit('removeTodo)
+
+    // },
+    
+    
+    removeItem(index){
+    this.todos.splice(index,1)
+    },
+
+     testing(){
+console.log(this.done)
+     },
+
+    //  checkTodo(){
+    //   this.todo.done = !this.todo.done
+    //   // persist(this.todos)
+    // },
+// removeTask: function(index) {
+//     this.content.splice(index, 1);
+// }
      
   },
 }
